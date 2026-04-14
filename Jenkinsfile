@@ -19,8 +19,11 @@ pipeline {
         stage('Sonar Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=digital-store -Dsonar.sources=."
-                }
+                    sh "${SCANNER_HOME}/bin/sonar-scanner \
+                    -Dsonar.projectKey=digital-store \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://sonarqube:9000 \
+                    -Dsonar.exclusions=**/*.js,**/*.ts"
             }
         }
     }
