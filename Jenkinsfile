@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
     }
@@ -11,19 +11,21 @@ pipeline {
                 echo 'Pipeline Started Successfully!'
             }
         }
+
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
+
         stage('Sonar Analysis') {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner \
                     -Dsonar.projectKey=digital-store \
                     -Dsonar.sources=. \
-                    -Dsonar.host.url=http://sonarqube:9000 \
                     -Dsonar.exclusions=**/*.js,**/*.ts"
+                }
             }
         }
     }
