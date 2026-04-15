@@ -2,8 +2,10 @@ pipeline {
     agent any
 
     environment {
-        SCANNER_HOME = tool 'sonar-scanner'
+        
         DOCKER_IMAGE = "sarasalah24/digital-store"
+        DOCKER_CRED_ID = 'dockerhub-cred'
+        K8S_CONFIG_ID = 'k8s-config'
     }
 
     stages {
@@ -47,24 +49,29 @@ pipeline {
             }
         }
 
-        stage('Deploy to Local (Validation)') {
+        stage('Deploy to Kubernetes') {
             steps {
                 script {
                     
-                    sh 'export DOCKER_HOST=tcp://host.docker.internal:2375 && docker rm -f digital-store-container || true'
-                    sh "export DOCKER_HOST=tcp://host.docker.internal:2375 && docker run -d --name digital-store-container -p 8085:80 ${DOCKER_IMAGE}:latest"
+                    withCredentials([file(credentialsId: "${K8S_CONFIG_ID}", variable: 'KUBECONFIG')]) {
+                        
+                        sh "kubectl --kubeconfig=\$KUBECONFIG apply -f deployment.yaml"
+                        sh "kubectl --kubeconfig=\$KUBECONFIG apply -f service.yaml"
+                        
+                        echo "✅ Application Deployed to Kubernetes Cluster!"
+                        sh "kubectl --kubeconfig=\$KUBECONFIG get pods"
+                    }
                 }
-                echo '✅ Application is live at http://localhost:8085'
             }
         }
     }
 
     post {
         success {
-            echo '🎉 SUCCESS: Image pushed to Docker Hub and local container is running!'
+            echo '🎉 Pipeline finished successfully! Your app is live.'
         }
         failure {
-            echo '❌ FAILURE: Something went wrong. Check the logs above.'
+            echo '❌ Pipeline failed. Check the logs to fix the issue.'
         }
     }
 }
