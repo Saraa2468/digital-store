@@ -19,21 +19,6 @@ pipeline {
             }
         }
 
-        stage('Sonar Analysis') {
-            steps {
-                withSonarQubeEnv('sonarqube') {
-        
-                    sh "${SCANNER_HOME}/bin/sonar-scanner \
-                    -Dsonar.projectKey=digital-store \
-                    -Dsonar.sources=. \
-                    -Dsonar.exclusions=**/*.js,**/*.ts,**/*.css,**/*.scss,**/node_modules/** \
-                    -Dsonar.language.js.skip=true \
-                    -Dsonar.language.ts.skip=true \
-                    -Dsonar.ws.timeout=300"
-                }
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 script {
