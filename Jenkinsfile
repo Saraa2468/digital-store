@@ -25,7 +25,8 @@ pipeline {
             steps {
                 script {
                     
-                    sh "export DOCKER_HOST=tcp://host.docker.internal:2375 && docker build -t ${DOCKER_IMAGE}:latest ."
+                
+                    sh "export DOCKER_HOST=tcp://172.17.0.1:2375 && docker build -t ${DOCKER_IMAGE}:latest ."
                 }
             }
         }
@@ -43,7 +44,7 @@ pipeline {
                     
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
                         sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
-                        sh "export DOCKER_HOST=tcp://host.docker.internal:2375 && docker push ${DOCKER_IMAGE}:latest"
+                        sh "export DOCKER_HOST=tcp://172.17.0.1:2375 && docker push ${DOCKER_IMAGE}:latest"
                     }
                 }
             }
