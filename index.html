@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara's Digital Store | DevOps Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .hero-section {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 30px;
+        }
+        .card { transition: transform 0.3s; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .card:hover { transform: translateY(-10px); }
+        .badge-devops { background-color: #28a745; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <section class="hero-section text-center">
+        <div class="container">
+            <span class="badge badge-devops">CI/CD Pipeline Verified</span>
+            <h1 class="display-4 fw-bold">Sara's Digital Store</h1>
+            <p class="lead">This application was deployed automatically using Jenkins, Docker, and SonarQube.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x200?text=Digital+Art+1" class="card-img-top" alt="Product">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Abstract Wall Art</h5>
+                        <p class="card-text text-muted">$15.00</p>
+                        <button class="btn btn-primary w-100">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x200?text=Digital+Art+2" class="card-img-top" alt="Product">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Minimalist Card</h5>
+                        <p class="card-text text-muted">$5.00</p>
+                        <button class="btn btn-primary w-100">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/300x200?text=Digital+Art+3" class="card-img-top" alt="Product">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Modern Illustration</h5>
+                        <p class="card-text text-muted">$20.00</p>
+                        <button class="btn btn-primary w-100">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-5 mt-5 text-muted">
+        <p>&copy; 2026 | Built with ❤️ for DevOps Portfolio</p>
+    </footer>
+
+</body>
+</html>
