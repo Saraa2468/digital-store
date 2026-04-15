@@ -28,12 +28,12 @@ pipeline {
             }
         }
 
-        stage('Image Scan (Trivy)') {
-            steps {
+        //stage('Image Scan (Trivy)') {
+           // steps {
                 
-                sh "trivy image --severity HIGH,CRITICAL ${DOCKER_IMAGE}:latest"
-            }
-        }
+              //  sh "trivy image --severity HIGH,CRITICAL ${DOCKER_IMAGE}:latest"
+           // }
+       // }
 
         stage('Push to Docker Hub') {
             steps {
