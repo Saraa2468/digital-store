@@ -42,9 +42,9 @@ pipeline {
             steps {
                 script {
                     
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_CRED_ID}", passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
                         sh "echo \$DOCKER_PASS | docker login -u \$DOCKER_USER --password-stdin"
-                        sh "export DOCKER_HOST=tcp://172.17.0.1:2375 && docker push ${DOCKER_IMAGE}:latest"
+                        sh "docker push ${DOCKER_IMAGE}:latest"
                     }
                 }
             }
