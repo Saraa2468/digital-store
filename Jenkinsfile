@@ -26,7 +26,7 @@ pipeline {
                 script {
                     
                 
-                    sh "export DOCKER_HOST=tcp://172.17.0.1:2375 && docker build -t ${DOCKER_IMAGE}:latest ."
+                    sh "docker build -t ${DOCKER_IMAGE}:latest ."
                 }
             }
         }
