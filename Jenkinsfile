@@ -55,8 +55,7 @@ pipeline {
                 script {
                     
                     withCredentials([file(credentialsId: 'k8s-config', variable: 'KUBECONFIG')]) {
-                
-                def k8sServer = "https://host.docker.internal:6443" 
+                    def k8sServer = "https://host.docker.internal:6443" 
                 
                 sh """
                     kubectl --kubeconfig=\$KUBECONFIG --server=${k8sServer} \
@@ -66,6 +65,8 @@ pipeline {
                     kubectl --kubeconfig=\$KUBECONFIG --server=${k8sServer} \
                     --insecure-skip-tls-verify --validate=false \
                     apply -f service.yaml
+
+                 """
                 }
             }
         }
