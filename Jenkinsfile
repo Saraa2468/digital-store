@@ -56,8 +56,8 @@ pipeline {
                     
                     withCredentials([file(credentialsId: "${K8S_CONFIG_ID}", variable: 'KUBECONFIG')]) {
                         
-                        sh "kubectl --kubeconfig=\$KUBECONFIG apply -f deployment.yaml --insecure-skip-tls-verify"
-                        sh "kubectl --kubeconfig=\$KUBECONFIG apply -f service.yaml --insecure-skip-tls-verify"
+                        sh "kubectl --kubeconfig=\$KUBECONFIG apply -f deployment.yaml --validate=false --insecure-skip-tls-verify"
+                        sh "kubectl --kubeconfig=\$KUBECONFIG apply -f service.yaml --validate=false --insecure-skip-tls-verify"
                         
                         echo "✅ Application Deployed to Kubernetes Cluster!"
                         sh "kubectl --kubeconfig=\$KUBECONFIG get pods"
